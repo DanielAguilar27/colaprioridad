@@ -1,0 +1,16 @@
+while True:
+    print("¿Qué desea hacer?")
+    print("1. Ingresar datos")
+    print("2. Pasar siguiente solicitud")
+    print("3. Mostrar la cola ")
+    
+    opcion = input("Ingrese su opción: ")
+    
+    if opcion == "1":
+        usuario()
+    elif opcion == "2":
+        eleiminarMin()
+    elif opcion == "3":
+        print()
+    else:
+        print("Opción inválida. Intente nuevamente.")

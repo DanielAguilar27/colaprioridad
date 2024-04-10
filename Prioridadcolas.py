@@ -1,6 +1,5 @@
 ## Daniel Aguilar - Iván Camargo - 10/04/2024
 
-
 class Usuario:
     def __init__(self, nombre, edad, direccion, motivo, gravedad):
         self.nombre = nombre
@@ -18,17 +17,12 @@ class Usuario:
         self.prioridadReal = self.gravedad * self.prioridad
 
 class Sistema():
-    def mostrarPosicion(Monticulo,Usuario): 
-        index=0
-        variable1=True
-        while variable1 and index<len(Monticulo.listaMonticulo):
-            if Usuario is Monticulo.eliminarMin() :
-                variable1=False
-            index+=1
-        return index
-
-                
-    
+    def menu():    
+        print("¿Qué desea hacer?")
+        print("1. Ingresar datos")
+        print("2. Pasar siguiente solicitud")
+        print("3. Mostrar la cola ")
+        print("4. Salir ")
 
 
 class MonticuloBinario:
@@ -45,8 +39,8 @@ class MonticuloBinario:
              self.listaMonticulo[i] = tmp
           i = i // 2
 
-    def insertar(self,k):
-      self.listaMonticulo.append(k)
+    def insertar(self,usuario):
+      self.listaMonticulo.append(usuario)
       self.tamanoActual = self.tamanoActual + 1
       self.infiltArriba(self.tamanoActual)
 
@@ -83,63 +77,49 @@ class MonticuloBinario:
       while (i > 0):
           self.infiltAbajo(i)
           i = i - 1
-"""
-jaime = Usuario("jaime",11,"xd","dsad",3)
-jaime2 = Usuario("jaime2",23,"xafadd","dsad",4)
-jaime3 = Usuario("jaime3",66,"asf","dsad",1)
-
-listaUsuarios = []
-
-listaUsuarios.append(jaime)
-listaUsuarios.append(jaime2)
-listaUsuarios.append(jaime3)
-
-
-listaPrioridad = []
-i = 0
-while i < len(listaUsuarios):
-    listaPrioridad.append(listaUsuarios[i].prioridadReal)
-    i+=1
-miMonticulo = MonticuloBinario()
-miMonticulo.construirMonticulo(listaUsuarios)
-print(miMonticulo.listaMonticulo)
-print(miMonticulo.listaMonticulo[1].prioridadReal)
-print(miMonticulo.listaMonticulo[2].prioridadReal)
-print(miMonticulo.listaMonticulo[3].prioridadReal)
-print(miMonticulo.eliminarMin().nombre)
-print(miMonticulo.eliminarMin().nombre)"""
 
 
 
 enElMenu = True
+miMonticulo = MonticuloBinario()
 while enElMenu:
-    print("¿Qué desea hacer?")
-    print("1. Ingresar datos")
-    print("2. Pasar siguiente solicitud")
-    print("3. Mostrar la cola ")
-    print("4. Salir ")
-    
+    print("-----------------------")
+    Sistema.menu()
     opcion = input("Ingrese su opción: ")
-    
     if opcion == "1":
-       miMonticulo = MonticuloBinario()
        nombre=input("Nombre:")
        edad=int(input("edad:"))
-       direccion=input("dirreccion:")
+       direccion=input("direccion:")
        motivo=input("motivo:")
        gravedad=int(input("gravedad:"))
        NuevoUsuario=Usuario(nombre,edad,direccion,motivo,gravedad)
        miMonticulo.insertar(NuevoUsuario)
-       print("Este usuario sera atendido en la posicion: ",Sistema.mostrarPosicion(miMonticulo,NuevoUsuario))
+       print("Este usuario sera atendido en la posicion: ",miMonticulo.listaMonticulo.index(NuevoUsuario))
        
 
     
     elif opcion == "2":
-        print("asbfas")
+       if miMonticulo.tamanoActual>0: 
+            print("Siguiente solicitud a ser atendida:")
+            print("Nombre:", miMonticulo.listaMonticulo[1].nombre)
+            print("Edad:", miMonticulo.listaMonticulo[1].edad)
+            print("Direccion:", miMonticulo.listaMonticulo[1].direccion)
+            print("Motivo:", miMonticulo.listaMonticulo[1].motivo)
+            print("Gravedad:", miMonticulo.listaMonticulo[1].gravedad)
+            miMonticulo.eliminarMin()
+       else:
+           print("No hay solicitudes pendientes.")
     elif opcion == "3":
-        print("asibfiaxnf")
+        print("Cola de atención en este momento:")
+        for i in range(1, miMonticulo.tamanoActual + 1):
+            miMonticulo.listaMonticulo[i]
+            print("Nombre:", miMonticulo.listaMonticulo[i].nombre)
+            print("Edad:", miMonticulo.listaMonticulo[i].edad)
+            print("Direccion:", miMonticulo.listaMonticulo[i].direccion)
+            print("Motivo:", miMonticulo.listaMonticulo[i].motivo)
+            print("Gravedad:", miMonticulo.listaMonticulo[i].gravedad)
     elif opcion == "4":
             enElMenu = False
     else:
         print("Opción inválida. Intente nuevamente.")
-     
+ 
